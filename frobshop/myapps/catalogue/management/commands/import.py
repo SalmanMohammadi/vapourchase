@@ -1,9 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 import csv
-from oscar.apps.catalogue.models import Product, Category, ProductAttribute,\
-                                        ProductClass, ProductCategory,\
-                                        ProductAttributeValue
-from oscar.apps.partner.models import Partner, StockRecord
+
 
 
 class Command(BaseCommand):
