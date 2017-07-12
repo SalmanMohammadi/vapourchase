@@ -23,15 +23,19 @@ class CSVImporter(object):
 				if row[0] == 'E-Liquid':
 					self.setup_eliquid()
 					continue
-				#Name || Category || Price || Strength || Size || Description
-				cat_string = create_from_breadcrumbs(row[1])
-				print cat_string
+				# 0Name || 1Category || 2Price || 3Strength || 4Size || 5Description
+				cat = create_from_breadcrumbs(row[1])
+				UPC = self.create_upc(row[0], cat, row[3], row[4])
+				print UPC
 
 
 	def create_upc(self, name, category, strength, size):
-		print 'hello_world'
+		return name.upper().replace(' ','') + 
+				category.name.upper().replace(' ', '') 
+
 
 	def setup_eliquid(self):
 		self.product_class = ProductClass.objects.filter(name='E-Liquids')
-
+		self.pa = {"Strength": ProductAttribute.objects.filter(name = 'Strength')[0],
+					"Size": ProductAttribute.objects.filter(name = "Size")[0]}
 
