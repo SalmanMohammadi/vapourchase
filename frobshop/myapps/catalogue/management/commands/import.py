@@ -1,7 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-import csv
-
-
+from myapps.partner.importer import CSVImporter
 
 class Command(BaseCommand):
 
@@ -10,4 +8,5 @@ class Command(BaseCommand):
 
 	def handle(self, *args, **options):
 		for file_path in options['file']:
-			print "Opening %s..." % file_path
+			importer = CSVImporter(file_path)
+			importer.main()

@@ -17,7 +17,8 @@ from oscar import get_core_apps
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+location = lambda x: os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), x)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -46,7 +47,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'widget_tweaks'
 ] 
-INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['myapps.catalogue'])
+INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['myapps.catalogue',
+                                                 'myapps.partner',]
+                                                )
 
 AUTHENTICATION_BACKENDS = (
     'oscar.apps.customer.auth_backends.EmailBackend',
@@ -154,7 +157,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'public/static/'
+MEDIA_URL = 'public/media/'
+
+MEDIA_ROOT = location("public/media")
+STATIC_ROOT = location('public/static')
 
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
 OSCAR_INITIAL_LINE_STATUS = 'Pending'
