@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['myapps.catalogue',
                                                  'myapps.partner',]
                                                 )
-
+SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
     'oscar.apps.customer.auth_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -157,11 +157,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = 'public/static/'
-MEDIA_URL = 'public/media/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = location("public/media")
-STATIC_ROOT = location('public/static')
+# MEDIA_ROOT = location("public/media")
+# STATIC_ROOT = location('public/static')
 
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
 OSCAR_INITIAL_LINE_STATUS = 'Pending'
