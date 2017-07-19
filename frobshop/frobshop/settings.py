@@ -15,11 +15,13 @@ import os
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
 
+from oscar.core.loading import get_class
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-location = lambda x: os.path.join(
-    os.path.dirname(os.path.realpath(__file__)), x)
+location = lambda x: os.path.join(os.path.dirname(os.path.realpath(__file__)),   x)
 
+DEBUG = True
+TEMPLATE_DEBUG = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -31,7 +33,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+INTERNAL_IPS = [
+                '127.0.0.1'
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,10 +49,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django_extensions',
-    'widget_tweaks'
+    'widget_tweaks',
+    'debug_toolbar',
 ] 
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['myapps.catalogue',
-                                                 'myapps.partner',]
+                                                 'myapps.partner',
+                                                 'myapps.basket',
+                                                 ]
                                                 )
 SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
@@ -63,6 +70,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 MIDDLEWARE_CLASSES = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,7 +83,6 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'frobshop.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -157,10 +164,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-# MEDIA_ROOT = location("public/media")
+MEDIA_ROOT = location("public/media/")
 # STATIC_ROOT = location('public/static')
 
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
@@ -170,3 +180,8 @@ OSCAR_ORDER_STATUS_PIPELINE = {
     'Being processed': ('Processed', 'Cancelled',),
     'Cancelled': (),
 }
+
+#Oscar specific settings.
+OSCAR_SHOP_NAME = "Vapourchase"
+OSCAR_SHOP_TAGLINE = "HELLO_WORLD"
+# OSCAR_MAX_BASKET_QUANTITY_THRESHOLD = 100

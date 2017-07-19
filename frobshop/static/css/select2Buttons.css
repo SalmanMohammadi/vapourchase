@@ -1,0 +1,10 @@
+div.selectbtn {
+    display: inline-block;
+    background-color: #666
+    /** other styles **/
+}
+div.selectbtn.on {
+    background-color: #777;
+    color: white;
+    /** styles as needed for on state **/
+}

@@ -31,7 +31,7 @@ class CSVImporter(object):
 					print "Successfully created %s" %row[0]
 				
 	def create_liquid(self, row):
-		# 0Name || 1Category || 2Price || 3Strength || 4Size || 5Description || 6PGVG
+		# 0Name || 1Category || 2Price || 3Strength || 4Size || 5Description || 6PGVG ||7Image
 		cat = create_from_breadcrumbs(row[1])
 		canonincal_product = self.get_or_create_canonincal_product(row[0], cat, row[5])
 		for strength in row[3].split('|'):
@@ -80,7 +80,7 @@ class CSVImporter(object):
 
 		
 
-	#Generic canonical product getter/creater.
+	#Generic canonical product getter/creater for e liquids.
 	def get_or_create_canonincal_product(self, name, category, description):
 		UPC = self.create_upc(name, category.name)
 		product = Product.objects.get_or_create(upc = UPC, 
@@ -89,6 +89,15 @@ class CSVImporter(object):
 		product.description = description
 		product.structure = 'parent'
 		product.save()
+
+		strength_attr = ProductAttributeValue.objects.get_or_create(product = product, attribute = self.pa['Strength'])[0]
+		strength_attr.save()
+
+		pgvg_attr = ProductAttributeValue.objects.get_or_create(product = product, attribute = self.pa['PGVG'])[0]
+		pgvg_attr.save()
+
+		size_attr = ProductAttributeValue.objects.get_or_create(product = product, attribute = self.pa['Size'])[0]
+		size_attr.save()
 
 		cat_prod = ProductCategory.objects.get_or_create(category_id = category.id,
 														 product_id = product.id)[0]
