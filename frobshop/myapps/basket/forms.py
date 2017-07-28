@@ -52,7 +52,7 @@ class AddToBasketForm(forms.Form):
             self.choices[key].sort(key=lambda tup: tup[1]) 
             self.fields[key] = forms.ChoiceField(
                 choices=tuple(self.choices[key]), label= _(key),
-                widget=forms.Select(), required = True)
+                widget=forms.RadioSelect(), required = True)
 
     def get_product(self, parent, options):
 

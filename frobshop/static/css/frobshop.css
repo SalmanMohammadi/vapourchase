@@ -1,0 +1,20 @@
+
+.affix-top,.affix{
+ position: static;
+}
+
+@media screen and (min-width: 1200px) {
+  #sidebar.affix-top {
+    position: static;
+  	margin-top:30px;
+  	width:275px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:275px;
+  }
+}
+
+

@@ -1,0 +1,97 @@
+//no margin on lists
+ol,
+ul {
+    &.row {
+        margin-left:0;
+        padding-left:0;
+        list-style: none;
+    }
+}
+
+//Remove margin if condition
+.row [class*="col-"] {
+    &.no-margin {
+        margin-left:0;
+    }
+}
+
+
+//Products listed container
+// Space between products in a list is determined by the Grid and therfore the
+// gutter width: 20px
+
+.side_categories {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: @well-bg;
+  border: 1px solid @well-border;
+  border-radius: @border-radius-base;
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+  blockquote {
+    border-color: #ddd;
+    border-color: rgba(0,0,0,.15);
+    }
+}
+.product_pod {
+    height:350px;
+    overflow:hidden;
+    outline:1px solid #d3d3d3;
+    text-align:center;
+    margin: @line-height-computed 0;
+    margin-top: @line-height-computed/2;
+    position:relative;
+    p, h3, h2, form {
+        margin-bottom:0;
+    }
+    h3 {
+        .h5();
+        margin-bottom:0;
+        font-weight: bold;
+    }
+    .price_color {
+        .h4();
+        color:@brand-success;
+    }
+    .availability,
+    .price_color {
+        min-height:30px;
+        white-space:nowrap;
+    }
+    .image_container{
+        width:auto;
+    }
+    .image_container,
+    .availability,
+    .price_color {
+        margin-bottom: 0px
+    }
+    .product_price {
+        position:absolute;
+        bottom:0;
+        width: 100%;
+    }
+}
+
+// Product list image container sets a height so images don't breakout
+// This can be used to verically align the image with same line-height
+// Alternatively if you are cropping images and have a specific W & H this isn't neccessary
+.image_container {
+    width:100%;
+    min-height:@imagecontainerheight;
+    overflow:hidden;
+    text-align: center;
+    position:relative;
+    img {
+        max-height:@imagecontainerheight - 10px;
+        max-width: 100%;
+        width:auto;
+        margin:0px auto;
+    }
+}
+
+// Add a hover state for thumbnail
+a:hover .thumbnail {
+    border-color: @link-color;
+    .box-shadow(0 1px 4px rgba(0,105,214,.25));
+}

@@ -9,8 +9,15 @@ class Command(BaseCommand):
 
 	def add_arguments(self, parser):
 		parser.add_argument('file', nargs='+')
+		parser.add_argument(
+            '--update',
+            action='store_true',
+            dest='update',
+            default=False,
+            help='Update product',
+        )
 
 	def handle(self, *args, **options):
 		for file_path in options['file']:
-			importer = CSVImporter(file_path)
+			importer = CSVImporter(file_path, options['update'])
 			importer.main()

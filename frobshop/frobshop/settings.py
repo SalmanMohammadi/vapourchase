@@ -65,7 +65,9 @@ AUTHENTICATION_BACKENDS = (
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr',
+        'INCLUDE_SPELLING': True,
     },
 }
 
@@ -98,6 +100,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.i18n',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
 
                 'oscar.apps.search.context_processors.search_form',
                 'oscar.apps.promotions.context_processors.promotions',
@@ -165,12 +168,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+    os.path.join(BASE_DIR, 'static/'),
+    )
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = location("public/media/")
+MEDIA_ROOT = location("public/media")
 # STATIC_ROOT = location('public/static')
 
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
@@ -184,4 +187,9 @@ OSCAR_ORDER_STATUS_PIPELINE = {
 #Oscar specific settings.
 OSCAR_SHOP_NAME = "Vapourchase"
 OSCAR_SHOP_TAGLINE = "HELLO_WORLD"
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)
+
+USE_LESS = True
 # OSCAR_MAX_BASKET_QUANTITY_THRESHOLD = 100

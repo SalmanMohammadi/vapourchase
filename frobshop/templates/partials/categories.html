@@ -1,0 +1,12 @@
+{% load category_tags %}
+
+<div class="categories">
+	{% category_tree depth=1 as tree_categories %}
+	{% if tree_categories %}
+		{% for tree_category, info in tree_categories %}
+				<div class="col-md-3">
+					<a href="{{ tree_category.get_absolute_url }}">{{ tree_category.name }}</a>
+				</div>
+		{% endfor %}
+	{% endif %}
+</div>
