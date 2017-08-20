@@ -1,20 +1,33 @@
 
-.affix-top,.affix{
+* {
+  transition-duration: 0.2s;
+}
+
+.affix-top, .affix{
  position: static;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 992px) {
   #sidebar.affix-top {
     position: static;
-  	margin-top:30px;
-  	width:275px;
+  	width:245px;
+  }
+
+  #sidebar.affix-bottom {
+    position: absolute;
+   //  bottom: 140px;
+    // top:auto;
+  	width:245px;
   }
   
   #sidebar.affix {
     position: fixed;
-    top:70px;
-    width:275px;
+    top:22px;
+    // bottom: 1400px;
+    width:245px;
+    bottom:auto;
   }
 }
+
 
 

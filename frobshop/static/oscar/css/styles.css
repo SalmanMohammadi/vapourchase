@@ -8570,9 +8570,6 @@ a .icon-flip-vertical:before {
     bottom: 20px;
   }
 }
-body {
-  background-color: #eeeeee;
-}
 .container-fluid {
   max-width: 1280px;
 }

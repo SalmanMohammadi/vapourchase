@@ -6,7 +6,7 @@ from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
 
 from oscar.core.loading import get_model
-from oscar.forms import widgets
+from myapps.basket import widgets
 
 Line = get_model('basket', 'line')
 Basket = get_model('basket', 'basket')
@@ -52,7 +52,8 @@ class AddToBasketForm(forms.Form):
             self.choices[key].sort(key=lambda tup: tup[1]) 
             self.fields[key] = forms.ChoiceField(
                 choices=tuple(self.choices[key]), label= _(key),
-                widget=forms.RadioSelect(), required = True)
+                widget=widgets.ButtonSelect(), required = True,
+                initial=self.choices[key][0][0])
 
     def get_product(self, parent, options):
 

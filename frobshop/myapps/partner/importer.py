@@ -17,12 +17,11 @@ from django.conf import settings
 
 class CSVImporter(object):
 
-	def __init__(self, file_path, update):
+	def __init__(self, file_path,):
 		self.file_path = file_path
 		self.partner = Partner.objects.filter(name='self_fulfilled')[0]
 		self.import_liquid = False
 		self.import_coil = False
-		self.update = update
 
 	def main(self):
 		self.parse_csv()
@@ -57,7 +56,7 @@ class CSVImporter(object):
 				upc = self.create_liquid_upc(row[0], cat.name, strength, size)
 				product_var = Product.objects.filter(upc = upc)
 
-				if self.update and product_var.exists():
+				if not product_var.exists():
 					product_var = Product.objects.get_or_create(upc = upc,
 						product_class = self.product_class)[0]
 					product_var.parent = canonincal_product
@@ -95,7 +94,7 @@ class CSVImporter(object):
 
 					print "Successfully created %s" %product_var.title
 				else:
-					print "Already exists: %s" %row[0]
+					print "Already exists: " + row[0] + ' '+ strength + ' ' + size
 
 		return (canonincal_product, product_var)
 		
@@ -105,6 +104,7 @@ class CSVImporter(object):
 		UPC = self.create_upc(name, category.name)
 		product = Product.objects.get_or_create(upc = UPC, 
 												product_class = self.product_class)[0]
+
 		product.title = name
 		product.description = description
 		product.structure = 'parent'
@@ -132,6 +132,9 @@ class CSVImporter(object):
 
 			product_image = ProductImage.objects.get_or_create(product=product)[0]
 			product_image.original.save(filename, File(img_temp))
+			product_image.save()
+		else:
+			print str(r.status_code) + "Couldn't download ", filename
 		return product
 
 	#Generic product UPC creator.

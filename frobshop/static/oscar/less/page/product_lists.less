@@ -16,46 +16,142 @@ ul {
 }
 
 
+.products{
+    min-height:100vh;
+}
+.title,
+.description{
+    z-index: 0;
+    text-align: center;
+
+}
+
+.view-options-top{
+    margin: 0;
+    padding: 0;
+    p{
+        padding-left: 80px;
+        display: inline-block;
+    }
+    .form-group{
+        padding-right: 80px;
+        div{
+            display: block;
+            overflow: hidden;
+            padding: 0 7px 0 15px;
+        }
+        select {
+            width: 100%;
+        }
+        label{
+            float:left;
+            font-weight: normal;
+            // text-align:left;
+
+        }
+
+    }
+         
+}
+
 //Products listed container
 // Space between products in a list is determined by the Grid and therfore the
 // gutter width: 20px
 
 .side_categories {
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
-  background-color: @well-bg;
-  border: 1px solid @well-border;
-  border-radius: @border-radius-base;
-  .box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
-  blockquote {
-    border-color: #ddd;
-    border-color: rgba(0,0,0,.15);
+
+    max-height: 100vh;
+    overflow: auto;
+    overflow: hidden;
+    padding: 25px;
+    margin-top:0px;
+    margin-bottom: 20px;
+    padding-top: 0px;
+    list-style-type: none;
+    // border: 1px solid @well-border;
+    // border-radius: @border-radius-base;
+    blockquote {
+        border-color: #ddd;
+        border-color: rgba(0,0,0,.15);
     }
+    h3{
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    hr{
+        margin-top: 4px;
+        margin-bottom: 4px;
+        background-color: #727272;
+        color: #727272;
+        border-top-color: #727272;
+    }
+    .panel {
+        text-align: left;
+        box-shadow: none;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        ul{
+            margin-bottom: 14px;
+            margin-top: 14px;
+            padding-left: 0px;
+            font-size: 1em;
+            list-style-type: none;
+            a{
+                width: 148px;
+            }
+            .caret{
+                display: inline-block;
+            }
+            .nav-header{
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            font-weight: bold;
+            }
+            .facet_checkbox{
+                border: 1px solid #666;
+                clear: left;
+                height: 8px;
+                width: 8px;
+                line-height: 0;
+                text-indent: -99999px;
+                margin-top: 3px;
+                vertical-align: middle;
+            }
+        }
+        
+    }
+
 }
 .product_pod {
-    height:350px;
-    overflow:hidden;
-    outline:1px solid #d3d3d3;
-    text-align:center;
+    height: 250px;
+    @media only screen and (max-width : 768px) { height: 400px; }
+    overflow:hidden; 
+    text-align: left;
     margin: @line-height-computed 0;
     margin-top: @line-height-computed/2;
     position:relative;
     p, h3, h2, form {
-        margin-bottom:0;
+        margin-bottom:2px;
+        font-size:12px;
     }
-    h3 {
-        .h5();
-        margin-bottom:0;
-        font-weight: bold;
+    .product_info{
+        width: 100%;
+        display: block;
     }
+    // h3 {
+    //     min-height:10px;
+    //     .h5();
+    //     margin-bottom:2px;
+    //     font-weight: bold;
+    // }
     .price_color {
-        .h4();
+        font-size: 14px;
+        font-weight:bold;
         color:@brand-success;
     }
     .availability,
     .price_color {
-        min-height:30px;
+        // min-height:20px;
         white-space:nowrap;
     }
     .image_container{
@@ -67,9 +163,11 @@ ul {
         margin-bottom: 0px
     }
     .product_price {
-        position:absolute;
+        // position:absolute;
         bottom:0;
-        width: 100%;
+    }
+    .title{
+        margin-bottom: 3px;
     }
 }
 
@@ -77,15 +175,14 @@ ul {
 // This can be used to verically align the image with same line-height
 // Alternatively if you are cropping images and have a specific W & H this isn't neccessary
 .image_container {
-    width:100%;
-    min-height:@imagecontainerheight;
+    // max-width:183px;
+    min-height:183px;
     overflow:hidden;
     text-align: center;
     position:relative;
     img {
-        max-height:@imagecontainerheight - 10px;
+        height: auto;
         max-width: 100%;
-        width:auto;
         margin:0px auto;
     }
 }
@@ -95,3 +192,6 @@ a:hover .thumbnail {
     border-color: @link-color;
     .box-shadow(0 1px 4px rgba(0,105,214,.25));
 }
+
+
+

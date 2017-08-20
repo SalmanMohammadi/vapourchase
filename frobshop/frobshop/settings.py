@@ -14,7 +14,6 @@ from oscar.defaults import *
 import os
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
-
 from oscar.core.loading import get_class
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django_extensions',
     'widget_tweaks',
+    'crispy_forms',
     'debug_toolbar',
 ] 
 INSTALLED_APPS = INSTALLED_APPS + get_core_apps(['myapps.catalogue',
@@ -187,9 +187,11 @@ OSCAR_ORDER_STATUS_PIPELINE = {
 #Oscar specific settings.
 OSCAR_SHOP_NAME = "Vapourchase"
 OSCAR_SHOP_TAGLINE = "HELLO_WORLD"
+USE_LESS = True
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
-USE_LESS = True
+
+OSCAR_PRODUCTS_PER_PAGE = 36
 # OSCAR_MAX_BASKET_QUANTITY_THRESHOLD = 100

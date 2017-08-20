@@ -2,23 +2,25 @@
 {% load thumbnail %}
 {% load i18n %}
 {% load display_tags %}
+{% load display_product_tags %}
 {% load staticfiles %}
 
 {% block product %}
-    <div class="product_pod">
+    <article class="product_pod">
         {% block product_image %}
             <div class="image_container">
                 {% with image=product.primary_image %}
-                    {% thumbnail image.original "x275" upscale=False as thumb %}
-                    <a href="{{ product.get_absolute_url }}"><img src="{{ thumb.url }}" alt="{{ product.get_title }}" class="rounded"></a>
+                    {% thumbnail image.original "x400" upscale=False as thumb %}
+                    <a href="{{ product.get_absolute_url }}"><img src="{{ thumb.url }}" alt="{{ product.get_title }}"></a>
                     {% endthumbnail %}
                 {% endwith %}
             </div>
         {% endblock %}
 
-
+        <div class="product_info">
         {% block product_title %}
-            <h3><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}">{{ product.get_title|truncatewords:4 }}</a></h3>
+        {% get_product_cat product as category %}
+            <p class="product-title"><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}">{{category|truncatewords:3}} - {{product.get_title|truncatewords:4}}</a></p>
         {% endblock %}
 
         {% block product_price %}
@@ -29,5 +31,6 @@
                 {% endif %}
             </div>
         {% endblock %}
-    </div>
+        </div>
+    </article>
 {% endblock %}

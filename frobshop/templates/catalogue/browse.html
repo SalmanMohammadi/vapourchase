@@ -1,4 +1,4 @@
-{% extends "layout_2_col.html" %}
+    {% extends "layout_2_col.html" %}
 
 {% load basket_tags %}
 {% load promotion_tags %}
@@ -28,57 +28,39 @@
         </li>
         <li class="active">{{ summary }}</li>
     </ul>
+
 {% endblock breadcrumbs %}
 
 {% block column_left %}
-    {% category_tree as tree_categories %}
-    {% if tree_categories %}
-        <div class="side_categories"  id="sidebar">
-            <ul class="nav nav-list" >
-                {% for tree_category, info in tree_categories %}
-                    <li>
-                        <a href="{{ tree_category.get_absolute_url }}">
-                            {% if tree_category.pk == category.pk %}
-                                <strong>{{ tree_category.name }}</strong>
-                            {% else %}
-                                {{ tree_category.name }}
-                            {% endif %}
-                        </a>
-
-                        {% if info.has_children %}<ul>{% else %}</li>{% endif %}
-                        {% for n in info.num_to_close %}
-                            </ul></li>
-                        {% endfor %}
-                {% endfor %}
-            </ul>
+    
+    <div class="side_categories"  id="sidebar">
+    <h4>REFINE BY</h4>
+        <hr>
+          {% if has_facets %}
+        <div class="facet./ ">
+            {% for field, data in facet_data.items %}
+                {% if data.results %}
+                    {% include 'search/partials/facet.html' with count=forloop.counter name=data.name items=data.results %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
         </div>
-    {% endif %}
+        {% endif %}
+    </div>
     
 {% endblock %}
 
 {% block content %}
-
-    <form method="get" class="form-horizontal">
+    <form method="get" class="form-inline view-options-top">
         {# Render other search params as hidden inputs #}
         {% for value in selected_facets %}
             <input type="hidden" name="selected_facets" value="{{ value }}" />
         {% endfor %}
         <input type="hidden" name="q" value="{{ search_form.q.value|default_if_none:"" }}" />
 
+
         {% if paginator.count %}
-            {% if paginator.num_pages > 1 %}
-                {% blocktrans with start=page_obj.start_index end=page_obj.end_index count num_results=paginator.count %}
-                    <strong>{{ num_results }}</strong> result - showing <strong>{{ start }}</strong> to <strong>{{ end }}</strong>.
-                {% plural %}
-                    <strong>{{ num_results }}</strong> results - showing <strong>{{ start }}</strong> to <strong>{{ end }}</strong>.
-                {% endblocktrans %}
-            {% else %}
-                {% blocktrans count num_results=paginator.count %}
-                    <strong>{{ num_results }}</strong> result.
-                {% plural %}
-                    <strong>{{ num_results }}</strong> results.
-                {% endblocktrans %}
-            {% endif %}
+            <p>{{paginator.count}} products</p>
             {% if form %}
                 <div class="pull-right">
                     {% include "partials/form_field.html" with field=form.sort_by %}
@@ -86,17 +68,17 @@
             {% endif %}
         {% else %}
             <p>
-                {% trans "<strong>0</strong> results." %}
+                {% trans "<strong>0</strong> products." %}
             </p>
         {% endif %}
     </form>
 
     {% if products %}
         <section>
-            <div>
+            <div class="products">
                 <ol class="row">
                     {% for product in products %}
-                        <li class="col-xs-6 col-sm-4 col-md-4 col-lg-4">{% render_product product %}</li>
+                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">{% render_product product %}</li>
                     {% endfor %}
                 </ol>
                 {% include "partials/pagination.html" %}

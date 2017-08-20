@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<div class="panel">
+    <ul>
+        <a href="#{{count}}" data-toggle="collapse">
+            
+            <h3 class="nav-header">
+                <span class="caret"></span>{{ name }}
+            </h3>
+
+        </a>
+        <div id="{{count}}" class="collapse in">
+        {% for item in items %}
+            <li>
+                {% if item.selected %}
+                    <input class="facet_checkbox" type="checkbox" name="{{ item.name }}" checked />
+                    <input class="facet_url" type="hidden" name="url_for_{{ item.name }}" value="{{ item.deselect_url }}" />
+                    <strong>{{ item.name }}</strong>
+                {% else %}
+                    {% if item.disabled %}
+                        <input type="checkbox" name="{{ item.name }}" disabled />
+                        {{ item.name }}
+                    {% else %}
+                        <input class="facet_checkbox" type="checkbox" name="{{ item.name }}" />
+                        <input class="facet_url" type="hidden" name="url_for_{{ item.name }}" value="{{ item.select_url }}" />
+                        <a href="{{ item.select_url }}">{{ item.name }}</a>
+                    {% endif %}
+                {% endif %}
+                {% if item.show_count %}
+                    ({{ item.count }})
+                {% endif %}
+            </li>
+        {% endfor %}
+        </div>
+    </dl>
+</div>

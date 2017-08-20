@@ -25,7 +25,7 @@
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-@body-bg:               #e5e5e5;
+@body-bg:               #fff;
 //** Global text color on `<body>`.
 @text-color:            @gray-dark;
 
@@ -38,9 +38,11 @@
 //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
 
-@font-family-sans-serif:  'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@font-family-sans-serif:  'Nunito', 'Didact Gothic', "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -147,7 +149,7 @@
 @btn-default-border:             #ccc;
 
 @btn-primary-color:              #fff;
-@btn-primary-bg:                 @brand-primary;
+@btn-primary-bg:                 #4BB543;
 @btn-primary-border:             darken(@btn-primary-bg, 5%);
 
 @btn-success-color:              #fff;
@@ -303,7 +305,7 @@
 //** Number of columns in the grid.
 @grid-columns:              12;
 //** Padding between columns. Gets divided in half for the left and right.
-@grid-gutter-width:         30px;
+@grid-gutter-width:         10px;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
 @grid-float-breakpoint:     @screen-sm-min;
